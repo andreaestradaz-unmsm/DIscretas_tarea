@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Alerta Sísmica | Lógica Proposicional</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <img id="hero-img" src="assets/earthquake_hero.png" class="earthquake-hero" alt="Ilustración de sismo en la tierra">
+    
+    <main class="container">
+        <header>
+            <h1>SISTEMA DE ALERTA SÍSMICA</h1>
+            <p>Evalúa las condiciones para emitir la alerta según la lógica proposicional masiva. Criterios de activación del protocolo de emergencia:</p>
+            <div class="formula-box">
+                <span class="formula">Alert = p ∧ (q ∨ r)</span>
+            </div>
+        </header>
+
+        <div class="propositions-grid">
+            <!-- P: Sismógrafo -->
+            <div class="prop-card" id="card-p" onclick="toggleProp('p')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12h3l3 -9 6 18 3 -9h3"></path>
+                </svg>
+                <div class="prop-info">
+                    <span class="prop-letter">Proposición p</span>
+                    <h2>Detección de Ondas P</h2>
+                    <p>El sismógrafo primario detecta las ondas iniciales generadas por el epicentro.</p>
+                </div>
+                <div class="toggle-switch">
+                    <div class="slider"></div>
+                </div>
+            </div>
+
+            <!-- Q: Sensores Secundarios -->
+            <div class="prop-card" id="card-q" onclick="toggleProp('q')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                <div class="prop-info">
+                    <span class="prop-letter">Proposición q</span>
+                    <h2>Confirmación de Red</h2>
+                    <p>La red secundaria de sensores distribuidos confirma el evento telúrico.</p>
+                </div>
+                <div class="toggle-switch">
+                    <div class="slider"></div>
+                </div>
+            </div>
+
+            <!-- R: Magnitud > 5.0 -->
+            <div class="prop-card" id="card-r" onclick="toggleProp('r')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <div class="prop-info">
+                    <span class="prop-letter">Proposición r</span>
+                    <h2>Magnitud > 5.0</h2>
+                    <p>La estimación preliminar de intensidad supera el umbral crítico de 5.0 grados.</p>
+                </div>
+                <div class="toggle-switch">
+                    <div class="slider"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="results-section" id="results-panel">
+            <div class="alert-status">
+                <svg class="siren-icon" id="siren" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <h2 id="alert-title">SISTEMA EN ESPERA</h2>
+            </div>
+            <div class="explanation">
+                <p id="alert-reason">Interactúa con las proposiciones del sistema para evaluar las condiciones geológicas.</p>
+                
+                <div class="logic-display">
+                    <div class="logic-item" id="log-p">p: Falso</div>
+                    <span class="operator">AND</span>
+                    <div class="logic-bracket">(</div>
+                    <div class="logic-item" id="log-q">q: Falso</div>
+                    <span class="operator">OR</span>
+                    <div class="logic-item" id="log-r">r: Falso</div>
+                    <div class="logic-bracket">)</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Overlay de Alerta -->
+    <div id="alert-overlay" class="alert-overlay">
+        <div class="alert-message">
+            <svg class="alert-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <h1>AVISO SÍSMICO</h1>
+            <p>Las mediciones geológicas cumplen la condición estricta. Alerta preventiva emitida a la población civil.</p>
+            <button onclick="dismissAlert()">Reconocer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
